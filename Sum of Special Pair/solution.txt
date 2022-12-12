@@ -1,0 +1,19 @@
+function sumOfSpecialPairs(N,A){
+    //write code here
+    let cnt=0;
+    let sum=0;
+    for(let i=0;i<N-1;i++){
+      for(let j=i+1;j<N;j++){
+        for(let k=1;k<=(j-i)/2;k++){
+            if((j-i)%k==0)
+            cnt++;
+          }
+        if(cnt==1){
+        sum=sum+Math.abs(A[j]-A[i]);
+        cnt=0;
+        }
+        else cnt=0;
+      }
+    }
+   console.log(sum);
+}
