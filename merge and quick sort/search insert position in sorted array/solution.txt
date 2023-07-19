@@ -1,0 +1,23 @@
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int si=0;
+        int li=nums.length-1;
+        return (search(si,li,nums,target));
+    }
+    public int search(int si,int li,int[] nums,int target){
+       int mi=(si+li)/2;
+       
+        if(li<0)
+        return 0;
+
+        if(si>li)
+        return mi+1;
+
+        if(target>nums[mi])
+        return search(mi+1,li,nums,target);
+        else if(target<nums[mi])
+        return search(si,mi-1,nums,target);
+
+        else return mi;
+    }
+}

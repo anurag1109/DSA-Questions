@@ -1,0 +1,72 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let [n,c]=input[line].trim().split(" ").map(Number)
+	    line++
+	    let arr=input[line].trim().split(" ").map(Number)
+	    line++
+	    console.log(largestMinDistance(arr,n,c))
+	   //console.log(shipWithinDays(arr,c, n))
+    }
+}
+
+
+function largestMinDistance(tables, n, c) { 
+    let min=Math.max(...tables)
+    let max=0
+    let ans=-1
+    for(let i=0;i<n;i++){
+        max+=tables[i]
+    }
+ 
+ while(min<=max){
+ let mid=Math.floor((max+min)/2)
+ if(check(tables,n,c,mid)){
+     ans=mid
+     max=mid-1
+     }
+     else
+     min=mid+1
+     }
+     return ans
+}
+
+function check(tables,n,c,mid){
+    let cnt=1
+    ans=0
+    for(let i=0;i<n;i++){
+        ans+=tables[i]
+        if(ans>mid){
+            cnt++
+            ans=tables[i]
+        }
+    }
+
+    return(cnt<=c)
+}
+
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

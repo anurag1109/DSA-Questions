@@ -1,0 +1,26 @@
+const LinkedListNode = class {
+    constructor(nodeData) {
+        this.data = nodeData;
+        this.next = null;
+    }
+};
+// Complete the function below
+var removeMinimum = function (head) {
+   let small=head
+   let temp=head
+   let prev=null
+   
+   while(temp!=null){
+       if(temp.next!=null&&temp.next.data<=small.data){
+           small=temp.next
+           prev=temp
+       }
+       temp=temp.next
+   }
+   if(small!=head){
+       prev.next=small.next
+   }else{
+       head=head.next
+   }
+   return head
+};

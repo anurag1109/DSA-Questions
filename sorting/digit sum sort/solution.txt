@@ -1,0 +1,95 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let size=+input[line]
+	    line++
+	    let arr=input[line].trim().split(" ").map(Number)
+	    line++
+	   // console.log(size,arr)
+	    sumsort(size,arr)
+	}
+}
+
+function sumsort(size,arr){
+   
+ let newarr=[]
+ for(let i=0;i<size;i++){
+     if(arr[i]<10){
+         newarr.push(arr[i])
+     }
+         else{
+            let sum=0
+            let num=arr[i]
+             while(num!=0){
+                 sum+=Math.floor(num%10)
+                 num=Math.floor(num/10)
+             }
+             newarr.push(sum)
+         }
+     }
+     
+     
+       for (let i = 0; i < size-1; i++) {   
+          let count=0
+        for (let j = 0; j < size -i- 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                count++
+                // sorted++
+                temp=arr[j]
+                arr[j]=arr[j+1]
+                arr[j+1]=temp
+                
+                temp=newarr[j]
+                newarr[j]=newarr[j+1]
+                newarr[j+1]=temp
+            }
+        }
+        if(count==0)
+        break
+    }
+    
+    
+        for(let i=0;i<size;i++){
+         let x=newarr[i]
+         let index=i
+         for(let j=i+1;j<size;j++){
+             if(newarr[j]<x){
+             x=newarr[j]
+             index=j
+             }
+         }
+        arr.splice(i,0,arr[index])
+        arr.splice(index+1,1)
+         
+        newarr.splice(i,0,newarr[index])
+        newarr.splice(index+1,1)
+         
+    }
+    console.log(...arr)
+}
+    
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

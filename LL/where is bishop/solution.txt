@@ -1,0 +1,64 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+
+	for(let i=0;i<tc;i++){
+	    let mat=[]
+	    for(let j=1;j<=8;j++){
+	        mat.push(input[line])
+line++
+	    }
+	 
+	    bishop(mat)
+	}
+}
+
+
+function bishop(mat){
+    // console.log(mat)
+    let two=0
+    for(let i=0;i<8;i++){
+        let cnt=0
+        let k=0
+        
+        for(let j=0;j<8;j++){
+            if(mat[i][j]=='#'){
+            cnt++
+            k=j
+            }
+        }
+        if(cnt==2)
+        two=1
+        if(cnt==1&&i!=0&&two==1){
+        console.log(i+1+" "+(k+1))
+        return
+        }
+      
+    }
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
+

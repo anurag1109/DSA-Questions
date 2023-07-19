@@ -1,0 +1,66 @@
+
+
+function runProgram(input){
+    input=input.trim().split("\n")
+    let tc=+input[0]
+    let line=1
+    for(let i=0;i<tc;i++){
+        let size=+input[line]
+        line++
+        let arr=input[line].trim().split(" ").map(Number)
+        line++
+        findid(size,arr)
+    }
+}
+   
+   function findid(n,arr){ 
+       let l=1
+       let r=n-2
+       let res=0
+       let maxl=arr[0]
+       let maxr=arr[n-1]
+       while(l<=r){
+           if(maxl<maxr){
+               if(arr[l]>=maxl){
+                   maxl=arr[l]
+               }else{
+                   res+=maxl-arr[l]
+               }
+               l++
+           }
+           else{
+               if(arr[r]>maxr){
+                   maxr=arr[r]
+               }else{
+                   res+=maxr-arr[r]
+               }
+               r--
+           }
+       }
+       console.log(res)
+
+}
+
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

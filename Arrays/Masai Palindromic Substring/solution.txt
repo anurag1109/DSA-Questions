@@ -1,0 +1,35 @@
+
+function masaiPalSubString(S){
+    //write code here
+    let cnt=0;
+    let max="";
+    let length=0;
+    for(let i=0;i<S.length;i++){
+        let k=i;
+        for(let j=S.length-1;j>=i;j--){ 
+            if(k==j){
+            length=cnt*2+1
+            cnt=0;
+                break;
+            }
+            if(k>j){
+            length=cnt*2;
+            cnt=0;
+                break;
+            }
+            if(S[k]==S[j]){
+                k++;
+                cnt++;
+            }
+            else{
+             j=j+cnt;
+             k=i;
+             cnt=0;
+            }
+        }
+        if(length>max)
+          max=length;
+    }
+    console.log(max);  
+  }
+

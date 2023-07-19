@@ -1,0 +1,61 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let num=+input[line++]
+	    let dp=[]
+	   // console.log(num)
+	    readtoone(num,0)
+	    console.log(x)
+	    x=-1
+	}
+}
+
+let x=-1
+
+function readtoone(num,cnt){
+    
+    if(num<1){
+    return
+    }
+    
+    if(num==1){
+    x=cnt
+    return
+    }
+
+    if(num%2==0)
+    readtoone(num/2,cnt+1)
+    
+    if(num%3==0)
+    readtoone(2*num/3,cnt+1)
+    
+    if(num%5==0)
+    readtoone(4*num/5,cnt+1)
+    
+
+
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

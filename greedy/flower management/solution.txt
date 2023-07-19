@@ -1,0 +1,70 @@
+//Enter code here
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let temp=input[line].trim().split(" ").map(Number)
+	    let size=temp[0]
+	    let tar=temp[1]
+	    line++
+	    let arr=input[line].trim().split(" ").map(Number)
+	    line++
+	    
+	    flower(size,tar,arr)
+	}
+	}
+
+
+function flower(size,tar,arr){
+    let cnt=0
+    if(arr[0]==0&&arr[1]==0)
+      cnt++
+    if(arr[size-1]==0&&arr[size-2]==0)
+      cnt++
+    if(cnt>=tar){
+        console.log("Yes")
+        return
+    }
+    
+    let zero=0
+    for(let i=1;i<size-1;i++){
+        if(arr[i]==0)
+         zero++
+        else
+         zero=0
+        if(zero==3){
+            cnt++
+            zero=0
+            i--
+        }
+    }
+
+    if(cnt>=tar){
+     console.log("Yes")
+     return
+    }
+    console.log("No")
+ }
+  
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

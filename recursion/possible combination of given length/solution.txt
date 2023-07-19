@@ -1,0 +1,49 @@
+//Enter code here
+function runProgram(input){
+
+	input=input.trim().split(" ").map(Number)
+	    	let size=+input[0]
+	    	let range=+input[1]
+	    	let str=1
+	  
+	        permutation(size,str,"",range,0)
+}
+
+function permutation(size,str,seq,range,cnt){
+    
+    if(cnt==range){
+       console.log(seq)
+       return
+    }
+    if(str>size){
+       return
+    }
+
+    for(let i=str;i<=size;i++){
+       let x=i
+       let temp=i+1
+       permutation(size,temp,seq+x+" ",range,cnt+1)
+    }
+}
+    
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

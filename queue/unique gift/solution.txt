@@ -1,0 +1,87 @@
+//Enter code here
+ //Enter code here
+ function runProgram(input){
+    input =input.trim().split("\n")
+    let tc=+input[0]
+    let line=1
+    for(let i=0;i<tc;i++){
+        let A=input[line]
+        line++
+        // console.log(A)
+    
+    gift(A)
+    // let arr1=input[1].trim().split(" ").map(Number)
+    // let arr2=input[2].trim().split(" ").map(Number)
+    }
+ }
+    
+    function gift(A){
+        
+        class Queue {
+  constructor() {
+    this.items = {};
+    this.headIndex = 0;
+    this.tailIndex = 0;
+  }
+  enqueue(item) {
+    this.items[this.tailIndex] = item;
+    this.tailIndex++;
+  }
+  dequeue() {
+    const item = this.items[this.headIndex];
+    delete this.items[this.headIndex];
+    this.headIndex++;
+    return item;
+  }
+  peek() {
+    return this.items[this.headIndex];
+  }
+  get length() {
+    return this.tailIndex - this.headIndex;
+  }
+}
+const queue = new Queue();
+        
+let obj={}
+let str=""
+for(let i=0;i<A.length;i++){
+    if(obj[A[i]]==undefined){
+        obj[A[i]]=1
+        queue.enqueue(A[i])
+    }
+    else{
+        obj[A[i]]+=1
+        while(obj[queue.peek()]>1)
+        queue.dequeue()
+    }
+    if(queue.length==0)
+    str+="#"
+    else
+    str+=queue.peek()
+ }
+console.log(str)
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
+
+

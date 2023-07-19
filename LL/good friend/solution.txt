@@ -1,0 +1,25 @@
+const LinkedListNode = class {
+    constructor(nodeData) {
+        this.data = nodeData;
+        this.next = null;
+    }
+};
+
+var evenOddMix = function (head) {
+   let cn = head;
+    let index = 1;
+    while (cn!=null) {
+        // cnosole.log(cn.value)
+      if (index % 2 === 0 && cn.data % 2 !== 1) {
+        return false;
+      }
+      if (index % 2 === 1 && cn.data % 2 !== 0) {
+        return false;
+      }
+      cn = cn.next;
+      index++;
+    }
+    return true;
+};
+
+

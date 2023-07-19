@@ -1,0 +1,74 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1;
+	for(let i=0;i<tc;i++){
+    let size1=input[line].trim().split(" ").map(Number)
+      line++
+    let n=+size1[0]
+    let m=+size1[1]
+
+        let arr=input[line].trim().split(" ").map(Number)
+    line++
+        
+    
+    distinct(n,m,arr)
+	
+	}
+}
+function distinct(n,tar,arr){
+
+let start=0
+let end=n-1
+let sum=0
+let temp=[-1,-1]
+
+ans=[Infinity,Infinity]
+while(start<end){
+    sum=arr[start]+arr[end]
+    
+    if(sum<tar){
+        start++
+    }
+    else if(sum>tar){
+        end--
+        
+    }else{
+       if(ans[0]>arr[start] || ans[0]==arr[start]&&ans[1]>arr[end]){
+           ans[0]=arr[start]
+           ans[1]=arr[end]
+           temp[0]=start
+           temp[1]=end
+       }
+
+       start++
+       end--
+        
+    }
+}
+
+console.log(...temp)
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

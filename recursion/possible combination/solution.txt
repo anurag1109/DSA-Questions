@@ -1,0 +1,48 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+// 	console.log(input)
+	input=input.trim().split("\n")
+// console.log(input)
+let line=0
+	    
+	    	let rowcol=input[0].trim().split(" ").map(Number)
+	    	let row=rowcol[0]
+	    	let col=rowcol[1]
+	    	let arr=input[1].trim().split(" ").map(Number)
+	        console.log(toeplitz(row,col,arr,0))
+	
+	
+}
+
+function toeplitz(num,sum,arr,i){
+    // console.log(row,col,arr)
+    if(sum<0||i>=arr.length)
+    return 0
+    if(sum==0)
+    return 1
+    let x=toeplitz(num,sum-arr[i],arr,0)+toeplitz(num,sum,arr,i+1)
+    return x
+   
+    }
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

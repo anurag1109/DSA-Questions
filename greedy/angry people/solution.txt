@@ -1,0 +1,38 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	    let n=+input[0]
+	    let arr=input[1].trim().split(" ").map(Number).sort((a,b)=>a-b)
+	    angry(n,arr)
+    }
+let max=0
+function angry(n,arr){
+    let dif=0
+for(let i=0;i<n-2;i++){
+    dif=arr[i+2]-arr[i]
+    max=Math.max(dif,max)
+    dif=0
+}
+console.log(max)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

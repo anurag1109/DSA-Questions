@@ -1,0 +1,48 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let size=+input[0]
+	let arr1=input[1].trim().split(" ").map(Number)
+	let arr2=input[2].trim().split(" ").map(Number)
+	merge(size,arr1,arr2)
+}
+
+
+function merge(size,arr1,arr2){
+    let x=0;
+    let y=0;
+    while(y<size){
+        if(arr2[y]<arr1[x]||arr1[x]==undefined){
+            arr1.splice(x,0,arr2[y])
+            x++
+            y++
+        }
+        else{
+            x++
+        }
+        }
+    
+console.log(...arr1)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

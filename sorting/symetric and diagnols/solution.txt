@@ -1,0 +1,86 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let size=+input[line]
+	    line++
+	   let arr=input[line].trim().split(" ").map(Number)
+	   line++;
+	   sum(size,arr)
+	}
+}
+
+function sum(N,arr){
+    console.log(arr)
+// var matrix = new Array(N).fill(null).map(()=>new Array(N).fill(null));
+let matrix=[N]
+for(let i=0;i<N;i++){
+    let temp=[N]
+    for(let j=0;j<N;j++)
+     temp[j]=0;
+    matrix[i]=temp;
+}
+
+    let top=0;
+    let bottom=N-1;
+    let right=N-1;
+    let left=0;
+    let k=0
+    while(top<=bottom&&left<=right){
+        for(let i=left;i<=right;i++){
+            matrix[top][i]=arr[k]
+            k++
+        }
+        top++
+        for(let i=top;i<=bottom;i++){
+            matrix[i][right]=arr[k]
+            k++
+        }
+        right--
+        for(let i=right;i>=left;i--){
+            matrix[bottom][i]=arr[k]
+            k++
+        }
+        bottom--
+        for(let i=bottom;i>=top;i--){
+            matrix[i][left]=arr[k]
+            k++
+        }
+        left++
+    }
+    
+    console.log(matrix)
+
+    let sum=0
+    for(let i=0;i<N;i++){
+      for(let j=0;j<N;j++){
+        if(i==j||(i+j==N-1&&i!=j))
+        sum+=matrix[i][j]
+       }
+     }
+    console.log(sum)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

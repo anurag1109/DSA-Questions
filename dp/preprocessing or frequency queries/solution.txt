@@ -1,0 +1,66 @@
+function runProgram(input){
+	// write code here
+	
+	input=input.trim().split("\n")
+// 	console.log(input)
+	let n=+input[0]
+	let arr=[]
+	for(let i=1;i<=n;i++){
+	    let q=input[i].trim().split(" ").map(Number)
+	    arr.push(q)
+	}
+// 	console.log(arr)
+	freq(arr)
+}
+
+
+function freq(q) {
+  const f = {};
+  const c = {};
+
+  const result = [];
+
+  q.forEach(qu => {
+    const op = qu[0];
+    const v = qu[1];
+
+    if (op === 1) {
+      f[v] = f[v] ? f[v] + 1 : 1;
+      c[f[v]] = (c[f[v]] || 0) + 1;
+      c[f[v] - 1] = c[f[v] - 1] > 0 ? c[f[v] - 1] - 1 : 0;
+    } else if (op === 2) {
+      if (f[v]) {
+        f[v]--;
+        c[f[v]]++;
+        c[f[v] + 1]--;
+      }
+    } else if (op === 3) {
+     c[v] > 0 ? console.log(1) : console.log(0)
+    }
+    // console.log(f,c)
+  });
+
+//   return result;
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

@@ -1,0 +1,43 @@
+function minLengthSubstr(s){
+//write code here
+let obj={}
+let count=0
+for(let i=0;i<s.length;i++){
+    if(obj[s[i]]==undefined){
+    obj[s[i]]=1
+    count++
+    }
+}
+
+obj={}
+let cnt=0
+let j=0
+let i=0
+while(cnt!=count){
+    if(obj[s[i]]==undefined){
+    obj[s[i]]=1
+    cnt++
+    }
+    else
+    obj[s[i]]+=1
+    i++
+}
+
+let min=i-j
+    while(i<=s.length){
+         if(i-j<min)
+            min=i-j
+            
+         if(obj[s[j]]>1){
+            obj[s[j]]-=1
+            j++
+        }
+         else if(i<s.length){
+             obj[s[i]]+=1
+             i++ 
+        }
+         else
+             i++
+    }
+console.log(min)
+}

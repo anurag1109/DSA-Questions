@@ -1,0 +1,57 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	  let size=+input[0]
+	  let arr=input[1].trim().split(" ").map(Number)
+	  let mat=[]
+	  for(let p=1;p<=size;p++){
+	      mat.push(p)
+	  }
+	  permutation(arr,mat,[])
+	  console.log(num)
+}
+
+let num=0
+
+
+function permutation(arr,mat,seq){
+    if(mat.length==0){
+        let x=arr[0]
+        let sum=0
+        while(x<=arr[1]){
+        sum+=seq[x]
+        x++
+        }
+        if(sum%2!=0)
+                 num++
+   
+    }
+for(let i=0;i<mat.length;i++){
+    submat=mat.slice(0,i)
+    submat.push(...mat.slice(i+1))
+    seq.push(mat[i])
+    permutation(arr,submat,seq)
+    seq.pop()
+}
+    
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

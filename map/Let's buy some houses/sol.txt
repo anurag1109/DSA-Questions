@@ -1,0 +1,48 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	tc=+input[0]
+	let line=1
+
+	for(let i=0;i<tc;i++){
+	    let road=+input[line++]
+	    let cnt=0
+        let obj={}
+        
+	    for(let j=0;j<road;j++){
+
+	     let arr=input[line++].trim().split(" ").map(Number)
+	     if(obj[arr[0]]==undefined){
+	       cnt++
+	       obj[arr[0]]=1
+	     }
+	     if(obj[arr[1]]==undefined){
+	       cnt++
+	       obj[arr[1]]=1
+	     }
+       }
+	console.log(cnt)
+  }
+}
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

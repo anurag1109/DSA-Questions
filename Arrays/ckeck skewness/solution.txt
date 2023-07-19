@@ -1,0 +1,66 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	  let n=+input[line++]
+	  console.log(skewed(n))
+	}
+}
+
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
+
+
+function skewed(n) {
+    let od = 0;
+    let ed = 0;
+  
+    for (let i = 1; i <= Math.sqrt(n); i++) {
+      if (n % i === 0) {
+        if (i % 2 === 0) {
+          ed++;
+        } else {
+          od++;
+        }
+  
+        if(i !== n / i) {
+          if ((n / i) % 2 === 0) {
+            ed++;
+          } else {
+            od++;
+          }
+        }
+      }
+    }
+  
+    if (od > ed) {
+      return "Odd Skewed";
+    } else if (ed > od) {
+      return "Even Skewed";
+    } else {
+      return "Not Skewed";
+    }
+  }

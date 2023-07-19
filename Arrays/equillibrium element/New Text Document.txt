@@ -1,0 +1,29 @@
+function equilibriumElement(N, arr){
+ let i=0
+ let j=N-1
+ 
+ suml=arr[i]
+ sumr=arr[j]
+ 
+ while(i<=j){
+     if(suml<sumr){
+         suml+=arr[i+1]
+         i++
+     }else if(sumr<suml){
+         sumr+=arr[j-1]
+         j--
+     }else if(i==j&&suml==sumr){
+         console.log(j)
+         return
+     }else if(suml==sumr){
+            suml+=arr[i+1]
+            sumr+=arr[j-1]
+            i++
+            j--
+     }else{
+         i++
+         j--
+     }
+ }
+ console.log(-1)
+}

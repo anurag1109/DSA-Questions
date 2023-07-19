@@ -1,0 +1,95 @@
+//Enter code here
+function runProgram(input){
+	input=input.trim().split("\n")
+	   	let size=+input[0]
+	   	let mat=[]
+	  for(let i=0;i<size;i++){
+	      let arr=new Array(size).fill(0)
+	      mat.push(arr)
+	  }
+
+      for(let i=0;i<size;i++){
+	      nqueen(size,0,i,mat)
+      }
+      console.log(cnt)
+}
+
+let coloc=[]
+let rowoc=[]
+let cnt=0
+
+function nqueen(size,row,col,mat){
+    
+    if(rowoc.includes(row)||coloc.includes(col)){
+    return
+    }
+    
+    let r=row;
+    let c=col
+    while(r!=0&&c!=0){
+        r--
+        c--
+    }
+    while(r<size&&c<size){
+       if(mat[r][c]==1){
+         return
+       } else{
+          r++
+          c++
+       }
+    }
+
+     r=row
+     c=col
+     while(r!=size-1&&c!=0){
+        r++
+        c--
+     }
+    
+     while(r>=0&&c<size){
+       if(mat[r][c]==1){
+         return
+        } else{
+           r--
+           c++
+        }
+     }
+
+     mat[row][col]=1
+     coloc.push(col)
+     rowoc.push(row)
+     r=row
+     r++
+     if(r==size)
+     cnt++
+     
+     for(let i=0;i<size;i++){
+        nqueen(size,r,i,mat)
+     }
+     
+     mat[row][col]=0 
+     coloc.pop()
+     rowoc.pop()
+}   
+
+    
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

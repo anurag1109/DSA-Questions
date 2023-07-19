@@ -1,0 +1,63 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=input[0].trim().split(" ").map(Number)
+	let total=+tc[0]
+	let num=+tc[1]
+	let cap=input[1].trim().split(" ").map(Number)
+// 	console.log(power(total,cap,0))
+	console.log(power(total,cap))
+
+}
+
+// function power(temp,cap,i){
+
+//     if(temp<0||i>=cap.length)
+//       return 0
+//     if(temp==0)
+//       return 1
+      
+//     // let x=power(temp-cap[0],cap)+power(temp-cap[1],cap)+power(temp-cap[2],cap)
+//     let x=power(temp-cap[i],cap,0)+power(temp,cap,i+1)
+//     return x
+// }
+
+
+
+function power(temp,cap){
+
+    if(temp<0)
+      return 0
+    if(temp==0)
+      return 1
+      
+    let count=0
+    for(let i=0;i<cap.length;i++){
+        count+=power(temp-cap[i],cap)
+    }
+    return count
+
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

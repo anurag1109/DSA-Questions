@@ -1,0 +1,47 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let size=+input[0]
+	let arr=input[1]
+	
+	
+	singlechar(size,arr)
+}
+
+
+function singlechar(size,arr){
+    let str=""
+    let i=0
+ while(i<size){
+     let char=arr[i]
+     let j=i
+     while(arr[j]==char){
+         j++
+     }
+     str+=arr[i]+(j-i)
+     i=j
+ }
+ console.log(str)
+    
+}
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

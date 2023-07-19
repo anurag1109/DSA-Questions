@@ -1,0 +1,88 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	  let size=+input[0]
+	  let arr=input[1].trim().split(" ").map(Number)
+	   sort(0,size-1,arr)
+
+	 let str=""
+	  for(let i=0;i<arr.length;i++)
+	  str+=arr[i]+" "
+	  console.log(str)
+}
+
+let num=0
+
+
+
+function sort(si,ei,arr){
+  let mi=Math.floor((si+ei)/2)
+  if(ei<si)
+  return 
+  
+ const pivot= partition(si,ei,arr)
+   sort(pivot+1,ei,arr)
+
+  sort(si,pivot-1,arr)
+
+  
+  
+  
+}
+
+function partition(si,ei,arr){
+
+let cnt=0
+// randomize quick sort
+let random=Math.floor(Math.random() * (ei - si) ) + si
+
+let pivot=arr[random ]
+for(let i=si;i<=ei;i++){
+    if(arr[i]>=pivot)
+    cnt++
+}
+
+let pivpos=si+cnt-1
+let temp=arr[pivpos]
+arr[pivpos]=arr[random]
+arr[random]=temp
+
+let start=si
+let end=ei
+
+while(start<pivpos&&end>pivpos){
+    if(arr[start]>=pivot)
+    start++
+   else if(arr[end]<pivot)
+    end--
+    else{
+        temp=arr[end]
+        arr[end]=arr[start]
+        arr[start]=temp
+        start++
+        end--
+    }
+}
+return pivpos
+}
+    
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

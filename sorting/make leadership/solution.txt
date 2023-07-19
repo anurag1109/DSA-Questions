@@ -1,0 +1,87 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	size=+input[0];
+	let arr=[]
+	let num=[]
+	for(let i=1;i<=size;i++){
+	let temp=input[i].trim().split(" ")
+	arr.push(temp[0])
+	num.push(temp[1])
+}
+sort(size,arr,num)
+}
+
+function sort(n,a,num){
+     let sorted=0
+       for (let i = 0; i < n-1; i++) {   
+          let count=0
+        for (let j = 0; j < n -i- 1; j++) {
+            if (a[j] > a[j + 1]) {
+                count++
+                sorted++
+                temp=a[j]
+                a[j]=a[j+1]
+                a[j+1]=temp
+                
+                temp=num[j]
+                num[j]=num[j+1]
+                num[j+1]=temp
+            }
+        }
+        if(count==0)
+        break
+    }
+   
+    for(let i=0;i<n;i++){
+         let x=num[i]
+         let index=i
+         for(let j=i+1;j<n;j++){
+             if(num[j]>x){
+             x=num[j]
+             index=j
+             }
+         }
+        a.splice(i,0,a[index])
+        a.splice(index+1,1)
+         
+        num.splice(i,0,num[index])
+        num.splice(index+1,1)
+         
+    }
+    
+    let str=""
+    x=num[0]
+    let count=1
+    for(let i=0;i<n;i++){
+        if(num[i]!=x){
+            count=i+1
+            x=num[i]
+        }
+        str+=count+" "+a[i]+"\n"
+    }
+    console.log(str)
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

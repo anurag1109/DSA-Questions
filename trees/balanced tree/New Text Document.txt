@@ -1,0 +1,31 @@
+// Definition of Binary Tree Node
+// class Node {
+//     constructor(val) {
+//         this.val = val;
+//         this.left = null;
+//         this.right = null;
+//     }
+// }
+// Complete the function below
+
+function BalancedTrees(root){
+    if(root==null)
+    return true
+    
+    lhalf=height(root.left)
+    rhalf=height(root.right)
+    
+    if(Math.abs(lhalf-rhalf)>1)
+    return false
+    
+    return  BalancedTrees(root.left)&&BalancedTrees(root.right)
+    
+}
+
+function height(root){
+        
+    if(root==null)
+    return 0
+    return 1+Math.max(height(root.left),height(root.right))
+
+}

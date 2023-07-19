@@ -1,0 +1,55 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let size=+input[0]
+      let arr=input[1].trim().split(" ").map(Number)
+      let tar=+input[2]
+
+      sumless(size,tar,arr)
+	}
+
+
+function sumless(size,tar,arr){
+        let si=0;
+        let li=arr.length-1;
+        console.log(search(si,li,arr,tar));
+    }
+    
+    
+    function search(si,li,nums,target){
+       let mi=Math.floor((si+li)/2);
+       
+        if(li<0)
+        return 0;
+
+        if(si>li)
+        return mi+1;
+
+        if(target>nums[mi])
+        return search(mi+1,li,nums,target);
+        else if(target<nums[mi])
+        return search(si,mi-1,nums,target);
+        else return mi;
+    }
+  
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

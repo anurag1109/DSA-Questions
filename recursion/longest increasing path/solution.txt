@@ -1,0 +1,64 @@
+ 
+function runProgram(input){
+    input =input.trim().split("\n")
+    let tc=input[0].trim().split(" ").map(Number)
+    let row=tc[0]
+    let col=tc[1]
+    let A=[]
+    let line=1
+    for(let i=0;i<row;i++){
+    A.push(input[line].trim().split(" ").map(Number))
+    line++
+    }
+    
+    for(let i=0;i<row;i++){
+        for(let j=0;j<col;j++){
+            votes(i,j,row,col,A)
+        }
+    }
+  
+    console.log(max)
+}
+
+let cnt=0
+let max=0
+function votes(x,y,row,col,A){
+    cnt++
+    if(x+1<row&&A[x+1][y]>A[x][y]){
+        votes(x+1,y,row,col,A)
+    }
+    if(y+1<col&&A[x][y+1]>A[x][y]){
+        votes(x,y+1,row,col,A)
+    }
+    if(x-1>=0&&A[x-1][y]>A[x][y]){
+        votes(x-1,y,row,col,A)
+    }
+    if(y-1>=0&&A[x][y-1]>A[x][y]){
+        votes(x,y-1,row,col,A)
+    }
+
+    max=Math.max(cnt,max)
+    cnt--
+    
+
+}
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

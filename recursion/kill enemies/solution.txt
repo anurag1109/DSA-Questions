@@ -1,0 +1,58 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	let size=+input[line];
+	line++;
+    let arr=input[line].trim().split(" ").map(Number)
+    line++
+    
+    sum=0
+    max=0
+    print(size,arr,0)
+    console.log(max)
+   }
+}
+let max=0
+let sum=0
+
+function print(size,arr,i){
+    
+    if(i>=size){
+    max=Math.max(max,sum)
+    return 
+    }
+    
+    sum+=arr[i]
+    print(size,arr,i+2)
+    sum-=arr[i]
+    //either
+    print(size,arr,i+1)
+    //or
+    // i-=2
+    //  print(size,arr,i+3)
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

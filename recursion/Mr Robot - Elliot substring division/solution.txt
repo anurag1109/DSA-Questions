@@ -1,0 +1,45 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let arr1=input[line]
+	    line++
+	     let arr2=input[line]
+	    line++
+	    str=""
+    	gifts(arr2)
+    	console.log(str)
+	}
+}
+
+ let str=""
+ function gifts(arr2){
+     if(arr2.length==0)
+     return
+     
+     str+=arr2[Math.ceil(arr2.length/2)-1]
+     gifts(arr2.slice(0,Math.ceil(arr2.length/2)-1))+gifts(arr2.slice(Math.ceil(arr2.length/2)),arr2.length)
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

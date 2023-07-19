@@ -1,0 +1,57 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    bits(+input[line++])
+	}
+}
+
+function bits(num){
+    let ans=[]
+    for(let i=0;i<=num;i++){
+       let noof1= intobinary(i)
+       ans.push(noof1)
+    }
+    console.log(...ans)
+}
+
+
+function intobinary(i){
+    if(i==0)
+    return 0
+    if(i==1)
+    return 1
+
+    let cnt=0
+    while(i!=0){
+        if(i%2==1)
+        cnt++
+        i=Math.floor(i/2)
+        
+    }
+    return cnt
+    
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

@@ -1,0 +1,58 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let str1=input[line++]
+	    let str2=input[line++]
+	    
+	    let dp=[]
+        for(let i=0;i<=str1.length;i++){
+            let a=[]
+            for(let j=0;j<=str2.length;j++)
+              a[j]=-1
+            dp.push(a)
+         }
+	console.log(distance(str1,str2,0,0,dp))
+	console.log(dp)
+    }
+}
+
+
+function distance(str1,str2,i,j,dp){
+    if(i==str1.length)
+     return (str2.length-j)
+    if(j==str2.length)
+     return (str1.length-i)
+    if(dp[i][j]!=-1)
+     return dp[i][j]
+    
+    if(str1[i]==str2[j])
+     return dp[i][j]=distance(str1,str2,i+1,j+1,dp)
+        
+    return dp[i][j]=1+Math.min(distance(str1,str2,i+1,j,dp),distance(str1,str2,i,j+1,dp),distance(str1,str2,i+1,j+1,dp))
+
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

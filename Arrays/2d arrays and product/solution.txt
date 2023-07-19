@@ -1,0 +1,30 @@
+function twoArrayAndProduct(n, m, matrix, p){
+    //write code here
+   let cnt=0
+  for(let i=0;i<n;i++){
+      let sum=0
+      for(let j=0;j<m;j++){
+          if(m-j>=3){
+              sum+=matrix[i][j]*matrix[i][j+1]*matrix[i][j+2]    
+              sum==p?cnt++:cnt+0
+          }
+          sum=0
+           if(n-i>=3){
+              sum+=matrix[i][j]*matrix[i+1][j] *matrix[i+2][j]    
+              sum==p?cnt++:cnt+0
+          }
+          sum=0
+           if(n-i>=3&&m-j>=3){
+              sum+=matrix[i][j]*matrix[i+1][j+1] *matrix[i+2][j+2]    
+              sum==p?cnt++:cnt+0
+          }
+          sum=0
+           if(j>1&&n-i>2){
+              sum+=matrix[i][j]*matrix[i+1][j-1] *matrix[i+2][j-2]    
+              sum==p?cnt++:cnt+0
+          }
+          sum=0
+      }
+  }
+  console.log(cnt)
+}

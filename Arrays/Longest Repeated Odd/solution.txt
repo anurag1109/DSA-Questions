@@ -1,0 +1,25 @@
+function longestRepeatedOdd(N, array) {
+    //write code here
+    let j=0;
+    let max=0;
+    let i=0
+    while(i<=N){
+        if(array[i]==array[j]&&i<N)
+            i++;
+        else if(array[j]%2!=0){
+            let count=i-j;
+            if(count>max)
+            max=count;
+            j=i;
+            i++;
+       }
+        else {
+            j=i;
+            i++;
+        }
+    }
+   console.log(max)
+    
+}
+
+//https://oj.masaischool.com/contest/5862/problems

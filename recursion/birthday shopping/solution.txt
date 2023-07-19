@@ -1,0 +1,44 @@
+function runProgram(input){
+
+	input=input.trim().split(" ").map(Number)
+	    	let size=+input[0]
+	    	let range=+input[1]
+	  
+	        permutation(size,1,"",range)
+}
+
+function permutation(size,cnt,seq,range){
+    
+    if(range==0){
+      console.log(seq)
+      return
+    }
+   if(cnt>size){
+      return
+}
+ for(cnt;cnt<=size;cnt++){
+    permutation(size,cnt+1,seq+cnt+" ",range-1)
+ }
+}
+    
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

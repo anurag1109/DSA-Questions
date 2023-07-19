@@ -1,0 +1,59 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	  let str1=input[0].trim().split("")
+	  let str2=input[1].trim().split("")
+	  console.log(sort(str1,str2,0,0))
+}
+
+let num=0
+
+// function sort(str1,str2){
+//     // console.log(str1,str2)
+//  let cnt=0
+// let i=0;let j=0
+// while(i<str1.length&&j<str2.length){
+//     if(str1[i]==str2[j]){
+//     cnt++
+//     i++
+//     j++
+// }
+//     if(str1[i]<str2[j])
+//     i++
+//      if(str1[i]>str2[j])
+//     j++
+// }
+// cnt==7?cnt=cnt-2:cnt
+//   console.log(cnt)
+// }
+
+function sort(str1,str2,i,j){
+
+if(i==str1.length||j==str2.length)
+return 0
+if(str1[i]==str2[j])
+return 1+sort(str1,str2,i+1,j+1)
+
+return(Math.max(sort(str1,str2,i+1,j),sort(str1,str2,i,j+1)))
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

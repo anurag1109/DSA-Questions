@@ -1,0 +1,35 @@
+function spiralTraversalIV(N, arr){
+    //write code here
+
+  let k=N
+  let str=[]
+  let rs=0
+  let re=N-1
+  let cs=0
+  let ce=N-1
+  let temp=0
+
+  while(rs<re){
+     temp=re
+     while(temp>rs){
+         str.push(arr[temp][ce])
+         temp--
+     }
+    
+     temp=ce
+     while(temp>cs){
+         str.push(arr[rs][temp])
+         temp--
+     }
+     
+     temp=rs
+     while(temp<re){
+          str.push(arr[temp][rs])
+          temp++
+    }
+  }
+
+  if(rs==re)
+    str.push(arr[rs][re])
+    console.log(...str)
+}

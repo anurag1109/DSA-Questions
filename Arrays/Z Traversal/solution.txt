@@ -1,0 +1,11 @@
+function zTraversal(N,arr){
+    //write code here
+    let str="";
+    for(let i=0;i<N;i++){
+        for(let j=0;j<N;j++){
+            if(i==0||i==N-1||i+j==N-1)
+            str+=arr[i][j]+" ";
+        }
+    }
+    console.log(str)
+}

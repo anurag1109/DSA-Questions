@@ -1,0 +1,43 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+
+	temp=input[0].trim().split(" ").map(Number)
+		let size=+temp[0];
+	let	sum=+temp[1];
+	arr=input[1].trim().split(" ").map(Number)
+	removesort(size,arr,sum)
+}
+
+function removesort(n,a,s){
+a.sort((p,q)=>p-q)
+let i=0
+let sum=a[i]
+while(sum<s){
+i++
+sum+=a[i]
+
+}
+console.log(i)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

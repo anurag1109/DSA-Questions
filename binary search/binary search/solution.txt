@@ -1,0 +1,53 @@
+//Enter code here
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=input[0].trim().split(" ").map(Number)
+	let total=+tc[1]
+	let num=+tc[0] 
+	let cap=input[1].trim().split(" ").map(Number)
+	
+	let li=0
+    let hi=num-1
+	cutter(li,hi,cap,total)
+}
+
+
+
+function cutter(li,hi,arr,len){
+    if(li>hi){
+    console.log(-1)
+    return -1
+    }
+    
+    let mi=Math.floor((li+hi)/2)
+    if(arr[mi]==len){
+    console.log(1)
+    return
+    }
+    if(arr[mi]>len)
+    return cutter(li,mi-1,arr,len)
+    if(arr[mi]<len)
+    return cutter(mi+1,hi,arr,len)
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

@@ -1,0 +1,42 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=input[0].trim().split(" ").map(Number)
+	let total=+tc[0]
+	let num=+tc[1]
+	let cap=input[1].trim().split(" ").map(Number)
+    console.log(power(total,num,cap,0))
+}
+
+function power(total,num,cap,i){
+    if(num<0||i>cap.length)
+      return 0
+      if(num==0)
+      return 1
+
+    let x=power(total,num-cap[i],cap,i+1)+power(total,num,cap,i+1)
+    return x
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

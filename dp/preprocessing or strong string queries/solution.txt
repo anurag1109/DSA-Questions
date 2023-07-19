@@ -1,0 +1,51 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	let n=+input[0]
+	let arr=input[1].trim().split(" ")
+	
+	let dp=[]
+    dp[0]=0
+    for(let i=0;i<arr.length;i++){
+       if((arr[i][0]=="a"||arr[i][0]=="e"||arr[i][0]=="i"||arr[i][0]=="o"||arr[i][0]=="u")&& 
+       (arr[i][arr[i].length-1]=="a"||arr[i][arr[i].length-1]=="e"||arr[i][arr[i].length-1]=="i"||arr[i][arr[i].length-1]=="o"||arr[i][arr[i].length-1]=="u"))
+        {
+         dp[i+1]=1+dp[i]
+        }else
+        dp[i+1]=dp[i]
+    }
+	
+	let qn=+input[2]
+	for(let i=3;i<3+qn;i++){
+	    let q=input[i].trim().split(" ").map(Number)
+	   	console.log(freq(q,dp))
+	}
+}
+
+
+function freq(q,dp){
+    return dp[q[1]]-dp[q[0]-1]
+}
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
+

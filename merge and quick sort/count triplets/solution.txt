@@ -1,0 +1,45 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	  let [size,tar]=input[0].trim().split(" ").map(Number)
+	  let arr=input[1].trim().split(" ").map(Number)
+      triplet(arr,tar)
+      console.log(num)
+}
+    
+let num=0
+
+function triplet(arr,tar){
+    let y=2
+    for(let i=0;i<arr.length-2;i++){
+        let x=i
+        while(arr[y]-arr[x]<=tar&&y<arr.length){
+            y++
+        }
+        let len = y - x - 2;
+        num += (len * (len + 1)) / 2;
+       
+    }
+}
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

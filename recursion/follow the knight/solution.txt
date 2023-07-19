@@ -1,0 +1,51 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("/n")
+	let temp=input[0].trim().split(" ").map(Number)
+	let n=+temp[0]
+	let m=+temp[1]
+	let c=+temp[2]
+	let k=0
+    console.log(ways(n,m,c,k))
+}
+
+let arr=[]
+function ways(n,m,c,k){
+   if(n<1||m<1||n>10||m>10||k>c)
+   return 0
+   if(k==c){
+       if(arr.includes(n+""+m))
+           return 0
+       else{
+           arr.push(n+""+m)
+           return 1
+       }
+   }
+   
+   let cnt=ways(n+2,m+1,c,k+1)+ways(n+2,m-1,c,k+1)+ways(n-2,m+1,c,k+1)
+           +ways(n-2,m-1,c,k+1)+ways(n+1,m+2,c,k+1)+ways(n-1,m+2,c,k+1)
+           +ways(n+1,m-2,c,k+1)+ways(n-1,m-2,c,k+1)
+   return cnt
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

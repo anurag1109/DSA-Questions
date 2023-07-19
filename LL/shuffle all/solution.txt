@@ -1,0 +1,33 @@
+const LinkedListNode = class {
+    constructor(nodeData) {
+        this.data = nodeData;
+        this.next = null;
+    }
+};
+// Complete the function below
+var shuffle = function (head) {
+    let arr=[];
+    let current = head;
+    while(current !== null){
+        arr.push(current.data);
+        current = current.next;
+    }
+    let arr1 = [];
+    let i=0;
+    while(arr.length !=0){
+        if(i%2 == 0){
+            arr1.push(arr.shift());
+        }else{
+            arr1.push(arr.pop());
+        }
+        i++
+    }
+    
+    current=head
+    for(let i=0;i<arr1.length;i++){
+        current.data=arr1[i]
+        current=current.next
+    }
+
+    return head
+};

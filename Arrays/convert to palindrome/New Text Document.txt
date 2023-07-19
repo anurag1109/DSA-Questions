@@ -1,0 +1,80 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	   let len=+input[line++]
+	   let str=input[line++]
+	   
+	   palindrome(len,str)
+	}
+}
+
+function palindrome(len,str){
+   let obj={}
+   for(let i=0;i<len;i++){
+       if(obj[str[i]]==undefined)
+       obj[str[i]]=1
+       else
+       obj[str[i]]+=1
+   }
+   
+   //optional
+//   let cnt=0
+//   for(let key in obj){
+//       if(obj[key]==1)
+//       cnt++
+//   }
+//   if(cnt>2){
+//   console.log("NO")
+//   return
+//   }
+  
+  
+  for(let key in obj){
+     let newstr=""
+     for(let i=0;i<len;i++){
+         if(str[i]!=key)
+         newstr+=str[i]
+      }
+      if(checkpalindrome(newstr)){
+         console.log("YES")
+         return
+      }
+   }
+  console.log("NO")
+}
+
+function checkpalindrome(str){
+    let start=0
+    let end=str.length-1
+    
+    while(start<end){
+        if(str[start]!==str[end])
+        return false
+        start++
+        end--
+    }
+    return true
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

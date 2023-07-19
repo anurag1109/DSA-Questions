@@ -1,0 +1,106 @@
+//Enter code here
+//Enter code here 
+
+function runProgram(input){
+    input =input.trim().split("\n")
+    let tc=+input[0]
+    let line=1
+    for(let i=0;i<tc;i++){
+        
+    size=+input[line]
+    line++
+    A1=input[line].trim().split(" ").map(Number)
+    line++
+    A2=input[line].trim().split(" ").map(Number)
+    line++
+    // console.log(size,A)
+    pushpop(size,A1,A2)
+    }
+}
+    
+    function pushpop(size,A1,A2){
+        // console.log(size,A1,A2)
+    
+    
+let stack = {
+  arr: [],
+  top: -1,
+ 
+  isEmpty: function() {
+    return (this.top == -1)
+  },
+
+  size: function() {
+    return (this.top + 1)
+  },
+
+  peek: function() {
+    if (this.top == -1)
+      return "stack is empty";
+
+    return this.arr[this.top]
+  },
+
+  push: function(elem) {
+    this.top++
+    this.arr[this.top] = elem
+  },
+
+  pop: function() {
+    if (this.top == -1)
+      return "stack is empty";
+
+    const temp = this.arr[this.top]
+    this.top--
+    return temp
+  },
+  
+ }
+ 
+let j=0
+for(let i=0;i<size;i++){
+    
+    while(A1[j]!=A2[i]&&j<size&&stack.peek()!=A2[i]){
+        stack.push(A1[j])
+        j++
+    }
+    if(A1[j]==A2[i]){
+    stack.push(A1[j])
+    j++
+    }
+    
+    if(stack.peek()==A2[i])
+    stack.pop()
+}
+
+ 
+    if(stack.isEmpty())
+    console.log("YES")
+    else
+    console.log("NO")
+
+}
+
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

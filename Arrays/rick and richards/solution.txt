@@ -1,0 +1,89 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let size=+input[line]
+	    line++
+	     let arr1=input[line].trim().split(" ").map(Number)
+	    line++
+// 	 let dp=[]
+// 	console.log(Math.min(climbing(size,arr1,0,dp),climbing(size,arr1,1,dp)))
+	banana(size,arr1)
+	}
+}
+
+
+
+
+// function climbing(size,arr1,i,dp){
+// if(i>=size)
+// return 0
+
+// if(dp[i])
+// return dp[i]
+
+// return dp[i]=arr1[i]+Math.min(climbing(size,arr1,i+1,dp),climbing(size,arr1,i+2,dp))
+
+
+// }
+
+function banana(size,arr){
+     let si=0
+     let ei=size-1
+     let sumsi=arr[si]
+     let sumei=arr[ei]
+     
+     while(si<ei){
+      if(sumsi/2<sumei){
+         si++
+         sumsi+=arr[si]
+      }
+      else if(sumsi/2>sumei){
+         ei--
+         sumei+=arr[ei]
+      }
+      else if(si+1==ei-1){
+         si++
+         sumsi+=arr[si]
+    
+      }else{
+         si++
+         ei--
+         sumsi+=arr[si]
+         sumei+=arr[ei]
+      }
+     }
+     
+    if(si>ei)
+     console.log(si,size-si)
+    else if((sumsi-arr[si])/2<=sumei-arr[ei])
+     console.log(si+1,size-si-1)
+    else
+     console.log(si,size-si)
+}
+
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

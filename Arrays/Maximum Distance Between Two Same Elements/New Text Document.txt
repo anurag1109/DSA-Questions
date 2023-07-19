@@ -1,0 +1,48 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let size=+input[line++]
+	    let arr=input[line++].trim().split(" ").map(Number)
+	    distance(size,arr)
+	}
+}
+function distance(n,arr){
+let obj={}
+let max=0
+for(let i=0;i<n;i++){
+    if(obj[arr[i]]==undefined)
+    obj[arr[i]]=[i]
+    else
+    obj[arr[i]].push(i)
+}
+
+for(let key in obj){
+    let dif=obj[key][obj[key].length-1]-obj[key][0]
+    max=Math.max(max,dif)
+}
+console.log(max)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

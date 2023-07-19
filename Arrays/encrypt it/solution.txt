@@ -1,0 +1,66 @@
+//Enter code here//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let str=input[0]
+	let num=+input[1]
+	print(str,num)
+// console.log("5".charCodeAt(0))
+  }
+
+
+function print(str,num){
+    // console.log(str)
+    let string=""
+   for(let i=0;i<str.length;i++){
+       
+       let ascii=str[i].charCodeAt(0)
+       
+       if(ascii>=65&&ascii<=90){
+       ascii=(ascii+num%26)
+       if(ascii>90)
+       ascii=ascii%91+65
+       string+= String.fromCharCode(ascii)
+       }
+       
+        else if(ascii>=97&&ascii<=122){
+       ascii=(ascii+num%26)
+        if(ascii>122)
+       ascii=ascii%123+97
+        string+= String.fromCharCode(ascii)
+       }
+        else if(ascii>=48&&ascii<=57){
+       ascii=(ascii+num%10)
+        if(ascii>57)
+       ascii=ascii%58+48
+        string+= String.fromCharCode(ascii)
+       }
+       else
+       string+=str[i]
+       
+    //   string+= String.fromCharCode(ascii)
+   }
+   console.log(string)
+   
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

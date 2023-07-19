@@ -1,0 +1,79 @@
+
+const LinkedListNode = class {
+    constructor(nodeData) {
+        this.data = nodeData;
+        this.next = null;
+    }
+};
+
+var rotateRight = function(head, k) {
+    // let temp=head
+    // let i=1
+    // let cnt=0
+    
+    // while(temp!=null){
+    // temp=temp.next
+    // cnt++
+    // }
+    // temp=head
+    // while(i<cnt-k%cnt){
+    // temp=temp.next
+    // i++
+    // }
+    
+    // let x=temp.next
+    // temp.next=null
+    // temp=x
+    
+    // while(x.next!=null)
+    // x=x.next
+    
+    // x.next=head
+    // return temp
+    
+    
+    // function reverse(head, k){
+    // // If head is NULL or K is 1 then return head
+    // if(head==null || head.next==null){
+    //     return head;
+    // }
+      
+ 
+    var temp = new LinkedListNode(-1);
+    temp.next = head;
+      
+
+    var prev = temp;
+    var curr = temp;
+    var next = temp;
+      
+    let count = 0;
+    while(curr!=null){
+        count++;
+        curr = curr.next;
+    }
+      
+    while(next!=null){
+        curr = prev.next;
+                          
+        next = curr.next; 
+                         
+
+        let toLoop = count > k ? k : count - 1;
+          
+        for(let i=1;i<toLoop;i++){
+ 
+            curr.next = next.next;
+            next.next = prev.next;
+            prev.next = next;
+            next = curr.next;
+        }
+        prev = curr; 
+        count -= k; 
+    }
+    return temp.next; 
+                    
+
+    
+};
+

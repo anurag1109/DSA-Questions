@@ -1,0 +1,59 @@
+//Enter code here
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	   console.log(root(0,+input[line],+input[line]))
+	   line++
+	}
+
+}
+//floor value
+function root(li,hi,num){
+    if(li>hi)
+    return hi
+    let mi=(li+hi)/2|0
+      //5.5|0==5 ==>it is same as Math.floor(5.5)
+    if(mi*mi==num)
+    return mi
+    if(mi*mi<num)
+    return root(mi+1,hi,num)
+    if(mi*mi>num)
+    return root(li,mi-1,num)
+}
+
+//upto decimal places
+// function root(li,hi,num){
+//   if(li>=hi-.0001)
+//   return li
+//     let mi=(li+hi)/2
+//     if(mi*mi==num)
+//     return mi
+//     if(mi*mi<num)
+//     return root(mi,hi,num)
+//     if(mi*mi>num)
+//     return root(li,mi,num)
+// }
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

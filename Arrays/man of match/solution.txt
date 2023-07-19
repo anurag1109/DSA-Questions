@@ -1,0 +1,72 @@
+//Enter code here//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	let size=+input[line];
+	line++;
+
+    let mat=input[line].trim().split(" ").map(Number)
+        line++
+	print(size,mat)
+  }
+}
+
+function print(size,mat){
+let ab=0
+let v=0
+let abs=true
+let vs=false
+for(let i=0;i<mat.length;i++){
+    if(abs==true){
+        ab+=mat[i]
+        if((mat[i]%2!=0&&(i+1)%6!=0)||(mat[i]%2==0&&(i+1)%6==0)){
+            abs=false
+            vs=true
+        }
+        
+    }
+     else{
+        v+=mat[i]
+        if((mat[i]%2!=0&&(i+1)%6!=0)||(mat[i]%2==0&&(i+1)%6==0)){
+            vs=false
+            abs=true
+        }
+        
+    }
+
+}
+if(ab>v)
+    console.log("AB de Villiers")
+    else if(v>ab)
+        console.log("Virat Kohli")
+        else
+        console.log("Tie")
+    
+
+}
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

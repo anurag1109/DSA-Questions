@@ -1,0 +1,41 @@
+function specificDiagonals(R, C, matrix, K){
+    //write code here
+    let elemrow=-1;
+    let elemcol=-1;
+    let row=-1;
+    let col=-1;
+     for(let i=0;i<R;i++){
+      for(let j=0;j<C;j++){
+          if(matrix[i][j]==K){
+          elemrow=i;
+          elemcol=j;
+          break;
+          }
+      }
+     }
+     let bag="";
+     row=elemrow;
+     col=elemcol;
+     while(row>0&&col>0){
+         row--;
+         col--;
+     }
+    while(row<R&&col<C){
+      bag=bag+matrix[row][col]+" ";
+            row++;
+            col++;
+         }
+     bag+="\n";    
+     row=elemrow;
+     col=elemcol;
+     while(row>0 && col<C-1){
+         row--;
+         col++;
+     }
+     while(col>=0 && row<R){
+     bag=bag+matrix[row][col]+" ";
+     row++;
+     col--;
+     }
+     console.log(bag)
+}

@@ -1,0 +1,37 @@
+//Definition of Binary Tree Node
+// class Node {
+//     constructor(val) {
+//         this.val = val;
+//         this.left = null;
+//         this.right = null;
+//     }
+// }
+// Complete the function below
+
+var pathSum = function(root, sum) {
+  let arr=[]
+
+  function findsum(root,sum,temp){
+        
+    if(root==null)
+    return
+    
+    if(sum<0)
+    return
+    
+    if(!root.left&&!root.right){
+      if(sum==root.val){
+        arr.push([...temp,root.val])
+      }
+      return
+    }
+
+    findsum(root.left,sum-root.val,[...temp,root.val])
+    findsum(root.right,sum-root.val,[...temp,root.val])
+    
+  }
+
+  findsum(root,sum,[])
+  return(arr)
+
+}

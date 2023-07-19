@@ -1,0 +1,59 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	size=+input[0];
+	arr=input[1].trim().split(" ").map(Number)
+	selection(size,arr)
+}
+
+function selection(N,arr){
+    //write code here
+    let x=0
+    let clone=arr.slice(0)
+    let str=""
+    for(let i=0;i<N;i++){
+        let temp=arr[i]
+        let index=i
+        for(let j=i+1;j<N;j++){
+            if(arr[j]<temp){
+            temp=arr[j]
+            index=j
+            }
+        }
+        for(let j=0;j<N;j++){
+            if(arr[index]==clone[j]){
+            str+=j+" "
+            clone[j]=1001
+            }
+        }
+        x=arr[i]
+        arr[i]=arr[index]
+        arr[index]=x
+            
+    }
+    console.log(clone)
+    
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

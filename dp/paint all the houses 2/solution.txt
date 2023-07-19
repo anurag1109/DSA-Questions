@@ -1,0 +1,63 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let [n,k]=input[0].trim().split(" ").map(Number)
+	let arr=[]
+	for(let i=0;i<n;i++){
+	    let q=input[i+1].trim().split(" ").map(Number)
+	    arr.push(q)
+	}
+	console.log(cost(arr))
+
+}
+
+function cost(cst){
+    const n=cst.length
+    let k=cst[0].length
+    const dp=[...Array(n)].map(()=>{
+       return Array(k).fill(0)
+    })
+    
+    for(let i=0;i<k;i++){
+        dp[0][i]=cst[0][i]
+    }
+    
+    for(let i=1;i<n;i++){
+        for(let j=0;j<k;j++){
+            let min=Infinity
+            for(let temp=0;temp<k;temp++){
+                if(temp!=j&&dp[i-1][temp]<min){
+                    min=dp[i-1][temp]
+                }
+            }
+            
+            dp[i][j]=cst[i][j]+min
+        }
+    }
+    
+    return Math.min(...dp[n-1])
+}
+
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

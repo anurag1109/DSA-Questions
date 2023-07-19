@@ -1,0 +1,46 @@
+function runProgram(input){
+
+	input=input.trim().split("\n")
+	    	let size=+input[0]
+	    	let arr=input[1].trim().split(" ").map(Number)
+	    	console.log(xor(arr))
+
+}
+
+function xor(nums){
+    let xorsum=0
+    let subsets=[0]
+    for(let elem of nums){
+        let last=subsets.length
+        for(let i=0;i<last;i++){
+            subsets.push(subsets[i]^elem)
+        }
+        
+    }
+    for(let elem of subsets){
+        xorsum+=elem
+    }
+    return xorsum
+}
+    
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

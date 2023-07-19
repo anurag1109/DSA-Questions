@@ -1,0 +1,40 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	  let size=+input[0]
+	  let arr=input[1].trim().split(" ").map(Number)
+	  permutation(arr,0,0)
+	  console.log(num)
+}
+
+let num=0
+
+function permutation(str,seq,cnt){
+     if(seq%2!=0)
+       num++
+
+    for(let i=cnt;i<str.length;i++){
+        permutation(str,seq+str[i],i+1)
+    }
+}
+    
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

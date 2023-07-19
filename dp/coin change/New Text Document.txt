@@ -1,0 +1,47 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	const n=+input[0]
+	const arr=input[1].trim().split(" ").map(Number)
+	const sum=+input[2]
+	
+	coinchange(n,arr,sum,0,0)
+	console.log(ans)
+}
+
+
+let ans=Infinity
+function coinchange(n,arr,sum,i,cnt){
+    if(cnt>ans)
+    return
+    
+    if(sum<0||i>=n){
+        return
+    }
+    
+    if(sum==0){
+        ans=Math.min(ans,cnt)
+    }
+    
+   return  coinchange(n,arr,sum-arr[i],i,cnt+1)+coinchange(n,arr,sum,i+1,cnt)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

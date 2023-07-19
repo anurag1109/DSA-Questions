@@ -1,0 +1,58 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	   let num=+input[line]
+	   line++
+	   let x= (hacks(num))
+	   //console.log(x)
+	   if(x>0)
+	   console.log("Yes")
+	   else
+	   console.log("No")
+	}
+}
+
+function hacks(num){
+    if(Math.floor(num)!==num)
+    return 0
+    if(num==1){
+       return 1
+    }
+    // if(num>=20){
+    //   if(hacks(num/20))
+    //   return(true)
+    // }
+    // if(num>=10){
+    //   if(hacks(num/10))
+    //   return(true)
+    // }
+    // return(false)
+    
+    let x=hacks(num/10)+hacks(num/20)
+    return x
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

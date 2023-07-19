@@ -1,0 +1,92 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1;
+	for(let i=0;i<tc;i++){
+    let size1=input[line].trim().split(" ").map(Number)
+      line++
+    let n=+size1[0]
+    let m=+size1[1]
+    let mat1=[]
+    for(let i=0;i<n;i++){
+        mat1.push(input[line].trim().split(" ").map(Number))
+    line++
+        
+    }
+    distinct(n,m,mat1)
+	}
+	
+}
+function distinct(n,m,mat){
+//     let num=0;
+//     let maincount=0;
+//     let count=1;
+//     let obj={}
+//     for(let i=0;i<m;i++){
+//      obj[mat[0][i]]=1;
+//     }
+//     //  console.log(obj)
+//     for(let num in obj){
+    
+//         for(let j=1;j<n;j++){
+//             for(let k=0;k<m;k++){
+//             if(num==mat[j][k]){
+//             count++;
+//             break
+//             }
+//         }
+//         if(count==1)
+//         break
+//         }
+//         // console.log(count)
+//         if(count==3)
+//         maincount++;
+//         count=1;
+//     }
+//     console.log(maincount)
+// }
+let mainobj={}
+ for(let j=0;j<n;j++){
+     let obj={}
+     for(let k=0;k<m;k++){
+         obj[mat[j][k]]=1;
+    }
+  for(let key in obj){
+    if(mainobj[key]==undefined)
+    mainobj[key]=1;
+    else
+    mainobj[key]+=1
+ }
+}
+let count=0;
+
+// console.log(mainobj)
+for(let key in mainobj){
+    if(mainobj[key]==n)
+    count++
+}
+console.log(count)
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

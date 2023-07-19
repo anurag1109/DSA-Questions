@@ -1,0 +1,62 @@
+//Enter code here
+
+function runProgram(input){
+	// write code here
+	input= input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let temp=input[line].trim().split(" ").map(Number)
+	    line++
+	    let size=+temp[0]
+	    let sum=+temp[1]
+	    let arr=input[line].trim().split(" ").map(Number)
+	    line++
+	 
+	    
+	    pairs(size,arr,sum)
+	}
+	
+}
+
+function pairs(size,arr,tar){
+    // console.log(size,arr,tar)
+    let i=0;
+    let j=0
+    let sum=0
+    while(i<tar){
+    sum+=arr[i]
+    i++
+    }
+    min=sum
+    while(i<size){
+    sum+=arr[i]-arr[j]
+    i++
+    j++
+    if(sum<min)
+    min=sum
+    }
+    console.log(min)
+ 
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

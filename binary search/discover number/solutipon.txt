@@ -1,0 +1,49 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=input[0].trim().split(" ").map(Number)
+	let q=+tc[1]
+	let len=+tc[0] 
+	let cap=input[1].trim().split(" ").map(Number).sort((a,b)=>b-a)
+	for(let i=0;i<q;i++){
+	    	let li=0
+    let hi=len-1
+	cutter(li,hi,cap,+input[i+2])
+	}
+
+}
+function cutter(li,hi,arr,len){
+    if(li>hi){
+    console.log("NO")
+    return -1
+    }
+    let mi=Math.floor((li+hi)/2)
+    if(arr[mi]==len){
+    console.log("YES")
+    return
+    }
+    if(arr[mi]<len)
+    return cutter(li,mi-1,arr,len)
+    if(arr[mi]>len)
+    return cutter(mi+1,hi,arr,len)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

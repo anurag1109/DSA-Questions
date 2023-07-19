@@ -1,0 +1,59 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0];
+	let line=1;
+	for(let i=0;i<tc;i++){
+	    let size=input[line];
+	    line++
+	    let mat=[]
+	    for(let i=0;i<size;i++){
+	        mat.push(input[line].trim().split(" ").map(Number))
+              line++
+	    }
+	swap(size,mat)
+	}
+}
+
+function swap(size,mat){
+    for(let i=0;i<Math.floor(size);i++){
+        for(let j=i;j<size;j++){
+            let x=mat[j][i]
+            mat[j][i]=mat[i][j]
+            mat[i][j]=x
+        }
+      
+    }
+    
+       let str=""
+    for(let i=0;i<size;i++){
+        for(let j=0;j<size;j++){
+             str+=mat[i][j]+" "
+        }
+        if(i!=size-1)
+          str+="\n"
+    }
+    console.log(str)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

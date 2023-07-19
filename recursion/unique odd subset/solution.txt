@@ -1,0 +1,55 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	   let size=+input[0]
+       let arr=input[1].trim().split(" ").map(Number).sort((a,b)=>a-b)
+	   let len=input[2]
+	   subset(arr,0,[],len)
+	   console.log(flag)
+}
+
+let flag="False"
+function subset(arr,index,str,len){
+    if(flag=="True")
+    return
+    let cnt=1
+    if(str.length>=len){
+        let sum=str[0]
+        for(let i=1;i<str.length;i++){
+          if(str[i-1]!=str[i])
+             cnt++
+          sum+=str[i]
+         }
+         if(sum%2!=0&&cnt>=len){
+          flag="True"
+          return
+         }
+     }
+    
+    for(let j=index;j<arr.length;j++){
+        str.push(arr[j])
+        subset(arr,j+1,str,len)
+        str.pop()
+     }
+}
+    
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}//Enter code here

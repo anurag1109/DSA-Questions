@@ -1,0 +1,53 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=input[0].trim().split(" ").map(Number)
+	let total=+tc[0]
+	let num=+tc[1]
+	let cap=input[1].trim().split(" ").map(Number)
+	let x=(power(total,cap,0,0))
+	
+	if(x[1]==Infinity)
+	console.log(-1)
+	else
+    console.log(x[1],x[0])
+}
+let max=1
+let min=Infinity
+
+function power(temp,cap,i,cnt){
+    if(temp<0||i>=cap.length){
+      return [max,min,0]
+    }
+    if(temp==0){
+      max=Math.max(max,cnt)
+      min=Math.min(min,cnt)
+      return [max,min,1]
+    }
+    let x=power(temp-cap[i],cap,i,cnt+1)[2]+power(temp,cap,i+1,cnt)[2]
+    return [max,min,x]
+}
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

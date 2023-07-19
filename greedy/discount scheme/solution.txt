@@ -1,0 +1,59 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let temp=input[0].trim().split(" ").map(Number)
+	let size=+temp[0]
+	let num=+temp[1]
+	let arr=input[1].trim().split(" ").map(Number).sort((a,b)=>a-b)
+	let line=2
+	for(let i=0;i<num;i++){
+	    let q=input[line].trim().split(" ").map(Number)
+	    line++
+	apples(size,num,arr,q)
+
+	}
+	
+}
+
+
+function apples(size,num,arr,q){
+    
+  let x=size-q[0]
+  let sum=0
+//   console.log(x,x+q[1])
+let i=x
+let y=x+q[1]-1
+while(i<y){
+    sum+=arr[i]+arr[y]
+    i++
+    y--
+}
+if(i==y)
+sum+=arr[i]
+
+  console.log(sum)
+  
+}
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

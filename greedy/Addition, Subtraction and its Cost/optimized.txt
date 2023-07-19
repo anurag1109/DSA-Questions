@@ -1,0 +1,54 @@
+function runProgram(input) {
+input=input.trim().split("\n");
+var t=+input[0];
+var step=1;
+while(t>0){
+    var [n,k]=input[step++].trim().split(" ").map(Number);
+    var arr=input[step++].trim().split(" ").map(Number);
+cost(n,k,arr)
+t--
+}
+}
+
+function cost(size,tar,arr){
+let sum=0
+let res=Infinity
+let temp=[]
+
+for(let i=0;i<size;i++){
+    temp=[]
+    for(let j=0;j<size;j++){
+        if(arr[i]>arr[j]){
+            temp.push((arr[i]-arr[j])*3)
+        }else{
+            temp.push((arr[j]-arr[i])*5)
+            
+        }
+    }
+   
+    temp.sort((a,b)=>a-b)
+    for(let j=0;j<tar;j++){
+        sum+=temp[j]
+    }
+    res=Math.min(res,sum)
+    sum=0
+}
+console.log(res)
+ }
+ 
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });

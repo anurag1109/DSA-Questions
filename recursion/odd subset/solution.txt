@@ -1,0 +1,90 @@
+//Enter code here
+//method-1
+
+function runProgram(input){
+	input=input.trim().split("\n")
+	  let size=+input[0]
+	  let arr=input[1].trim().split(" ").map(Number)
+	  permutation(arr,0,0)
+	  console.log(num)
+}
+
+let num=0
+function permutation(arr,str,cnt,x){
+
+    if(cnt>arr.length)
+    return
+    if(str%2!=0&&x==0)
+    num++
+    
+    permutation(arr,str+arr[cnt],cnt+1,0)
+    permutation(arr,str,cnt+1,1)
+    
+}
+
+
+//method-2
+//function runProgram(input){
+//	input=input.trim().split("\n")
+//	  let size=+input[0]
+//	  let arr=input[1].trim().split(" ").map(Number)
+//	  permutation(arr,[])
+//	  console.log(cnt)
+//}
+//
+//let cnt=0
+//function permutation(arr,str){
+//
+//  if(arr.len==0)
+//    return
+//    
+//  if(str.length!=0){
+//     let sum=str[0]
+//        for(let i=1;i<str.length;i++){
+//          sum+=str[i]
+//        }
+//        if(sum%2!=0){
+//            cnt++
+//        }
+//   }
+//
+//    for(let j=0;j<arr.length;j++){
+//        let newstr=arr[j]
+//        let subarr=arr.slice(j+1)
+//        str.push(newstr)
+//        permutation(subarr,str)
+//        str.pop()
+//    }  
+//}
+//
+
+   
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
+
+
+
+
+
+
+
+    

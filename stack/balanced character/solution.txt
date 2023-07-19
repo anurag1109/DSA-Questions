@@ -1,0 +1,95 @@
+//Enter code here
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let size=+input[line]
+	    line++
+	   let arr=input[line]
+	   line++;
+	   balanced(size,arr)
+	}
+}
+
+function balanced(N,arr){
+    
+    // console.log(N,arr)
+    
+    let stack = {
+  arr: [],
+  top: -1,
+ 
+  isEmpty: function() {
+    return (this.top == -1)
+  },
+
+  size: function() {
+    return (this.top + 1)
+  },
+
+  peek: function() {
+    if (this.top == -1)
+      return "stack is empty";
+
+    return this.arr[this.top]
+  },
+
+  push: function(elem) {
+    this.top++
+    this.arr[this.top] = elem
+  },
+
+  pop: function() {
+    if (this.top == -1)
+      return "stack is empty";
+
+    const temp = this.arr[this.top]
+    this.top--
+    return temp
+  },
+  
+ }
+    
+    for(let i=0;i<N;i++){
+        if(arr[i].charCodeAt(0)>=97){
+            stack.push(arr[i])
+            continue
+        }
+        if(stack.peek().charCodeAt(0)-32==arr[i].charCodeAt(0))
+        stack.pop()
+        // else{
+        //   console.log("False")
+        //   return
+        // }
+    }
+    
+    if(stack.isEmpty())
+    console.log("True")
+    else
+    console.log("False")
+
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

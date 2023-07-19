@@ -1,0 +1,54 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	    let c=+input[0]
+	    let n=+input[1]
+	    let v=input[2].trim().split(" ").map(Number)
+	    let w=input[3].trim().split(" ").map(Number)
+	    
+	    let arr=[]
+	    for(let i=0;i<n;i++){
+	      let newarr=[]
+	      newarr[0]=v[i]/w[i]
+	      newarr[1]=w[i]
+	      newarr[2]=v[i]
+	      arr.push(newarr)
+	    }
+	    steal(n,c,arr)
+}
+
+function steal(n,c,arr){
+        arr.sort((a,b)=>b[0]-a[0])
+	    let sum=0
+	    for(let i=0;i<n;i++){
+	        if(c>=arr[i][1]){
+	            c-=arr[i][1]
+	            sum+=arr[i][2]
+	        }else{
+	            sum+=arr[i][0]*c
+	            break
+	        }
+	    }
+	    console.log(Math.round(sum))
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

@@ -1,0 +1,61 @@
+//Enter code here
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=input[0].trim().split(" ").map(Number)
+	let total=+tc[0]
+	let num=+tc[1] 
+	let arr=input[1].trim().split(" ").map(Number)
+	let lower=lowerbound(0,total-1,arr,num)
+	let upper=upperbound(0,total-1,arr,num)
+	ans==-1?console.log(0):console.log(upper-lower+1)
+}
+
+let ans=-1
+
+function lowerbound(li,hi,arr,num){
+    if(li>hi)
+    return ans
+    let mi=Math.floor((li+hi)/2)   
+    if(arr[mi]==num){
+        ans=mi
+    }
+    if(arr[mi]<num)
+    return lowerbound(mi+1,hi,arr,num)
+    if(arr[mi]>=num)
+    return lowerbound(li,mi-1,arr,num)
+}
+
+
+function upperbound(li,hi,arr,num){
+    if(li>hi)
+    return ans
+    let mi=Math.floor((li+hi)/2)   
+    if(arr[mi]==num){
+        ans=mi
+    }
+    if(arr[mi]<=num)
+    return upperbound(mi+1,hi,arr,num)
+     if(arr[mi]>num)
+    return upperbound(li,mi-1,arr,num)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

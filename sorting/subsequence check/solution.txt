@@ -1,0 +1,52 @@
+//Enter code here
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let temp=input[0].trim().split(" ").map(Number)
+	let size1=temp[0]
+	let size2=temp[1]
+	let arr1=input[1]
+	let arr2=input[2]
+	substring(size1,size2,arr1,arr2)
+
+}
+function substring(size1,size2,arr1,arr2){
+    // console.log(size1,size2,arr1,arr2)
+    let i=0
+    let j=0
+    while(j<size2){
+        if(arr2[j]==arr1[i])
+        i++
+        
+        j++
+        
+    }
+    if(i==size1)
+    console.log("YES")
+    else
+    console.log("NO")
+}
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

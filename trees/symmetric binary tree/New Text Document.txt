@@ -1,0 +1,72 @@
+class Node {
+    constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+// Complete the function below
+
+var isSymmetric = function (root) {
+    if(root==null)
+    return true
+    return check(root.left,root.right)
+};
+
+function check(left,right){
+    if(left==null&&right==null)
+    return true
+    if(left==null||right==null)
+    return false
+    
+    if(left.val!=right.val)
+    return false
+    
+    return (check(left.left,right.right)&&check(left.right,right.left))
+  
+}
+
+
+
+//or
+//symmetric tree==mirror image of left half+same tree or not
+
+// var isSymmetric = function (root) {
+//     if(root==null)
+//     return true
+//     mirror(root.left)
+//     return isSameTree(root.left,root.right)
+// };
+
+
+// function mirror(root){
+//     if(root==null)
+//     return null
+    
+//     let ltree=mirror(root.left)
+//     let rtree=mirror(root.right)
+    
+//     root.right=ltree
+//     root.left=rtree
+    
+//     return root
+   
+// }
+
+
+// function isSameTree(a,b){
+    
+//     if(!a&&!b)
+//     return true
+    
+//     if(!a||!b)
+//     return false
+    
+//     if( a.val!==b.val)
+//     return false
+    
+//     return isSameTree(a.left,b.left) && isSameTree(a.right,b.right)
+
+// }
+
+

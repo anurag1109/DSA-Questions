@@ -1,0 +1,46 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=1
+	let line=1;
+	for(let i=0;i<tc;i++){
+    let arr=input[line].trim().split(" ").map(Number)
+      line++
+   
+    distinct(arr)
+	}
+	
+}
+function distinct(arr){
+let min=arr[0]
+let max=arr[0]
+for(let i=0;i<arr.length;i++){
+    max=Math.max(arr[i+1],max)
+    while(arr[i+1]<max){
+      i++
+      min=arr[i+1]||-1
+    }
+}
+console.log(min)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

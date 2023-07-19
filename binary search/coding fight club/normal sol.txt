@@ -1,0 +1,60 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	let arr=[]
+	for(let i=0;i<tc;i++){
+	   arr.push(+input[line])
+	   line++
+	}
+	let power=[]
+	let q=+input[line]
+	line++
+	for(let j=0;j<q;j++){
+	    power.push(+input[line])
+	    line++
+	}
+	
+	club(arr,power)
+
+}
+//floor value
+function club(arr,power){
+ arr.sort((a,b)=>a-b)
+ 
+ let j=0
+ while(j<power.length){
+     let i=0
+     let sum=0
+     while(arr[i]<=power[j]){
+     sum+=arr[i]
+     i++
+ }
+ console.log(i,sum)
+ j++
+ }
+}
+
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

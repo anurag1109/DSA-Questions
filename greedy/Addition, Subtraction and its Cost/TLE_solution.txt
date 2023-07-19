@@ -1,0 +1,78 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let temp=input[line].trim().split(" ").map(Number)
+	    let size=temp[0]
+	    let tar=temp[1]
+	    line++
+	    let arr=input[line].trim().split(" ").map(Number).sort((a,b)=>b-a)
+	    line++
+	    flower(size,tar,arr)
+	}
+	}
+
+
+function flower(size,tar,arr){
+
+ let res=Infinity
+ for(let i=0;i<size;i++){
+     let num=1
+      let min=0
+     let start=i
+     while(arr[i]==arr[i+1]){
+     i++
+     num++
+     }
+     let end=i
+       let e=1
+         let s=1
+     while(num!=tar){
+    //   console.log(s,e)
+         let type1=Infinity
+         let type2=Infinity
+         if((start-s)>=0)
+        type2=(arr[start-s]-arr[start])*5
+        if((end+e)<size)
+        type1=(arr[end]-arr[end+e])*3
+        // console.log(type1,type2)
+         if(type1<=type2){
+             e++
+             num++
+             min+=type1
+         }else{
+             s++
+             num++
+             min+=type2
+         }
+     }
+    //  console.log(min)
+     if(res>min)
+     res=min
+
+ }
+ console.log(res)
+ }
+  
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

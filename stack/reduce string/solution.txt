@@ -1,0 +1,77 @@
+function runProgram(input){
+    
+let stack = {
+  arr: [],
+  top: -1,
+ 
+  isEmpty: function() {
+    return (this.top == -1)
+  },
+
+  size: function() {
+    return (this.top + 1)
+  },
+
+  peek: function() {
+    if (this.top == -1)
+      return "stack is empty";
+
+    return this.arr[this.top]
+  },
+
+  push: function(elem) {
+    this.top++
+    this.arr[this.top] = elem
+  },
+
+  pop: function() {
+    if (this.top == -1)
+      return "stack is empty";
+
+    const temp = this.arr[this.top]
+    this.top--
+    return temp
+  },
+  
+}
+
+
+for(let i=0;i<input.length;i++){
+    if(stack.peek()==input[i])
+    stack.pop()
+    else
+    stack.push(input[i])
+    
+}
+
+let str=""
+if(stack.isEmpty())
+console.log("Empty String")
+else{
+while(stack.size()!=0)
+str=stack.pop()+str
+console.log(str)
+}
+
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

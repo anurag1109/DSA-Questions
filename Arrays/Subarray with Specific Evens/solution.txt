@@ -1,0 +1,26 @@
+function subArrWithSpecificEven(N,K,arr){
+    //write code here
+    let count=0;
+    for(let i=0;i<N;i++){
+        let bag=""
+        for(let j=i;j<N;j++){
+            bag+=arr[j] ;
+            if(targetsubarray(bag,K))
+            count++
+            }
+    }
+    console.log(count);
+    
+}
+
+function targetsubarray(bag,K){
+    let count=0;
+    for(let i=0;i<bag.length;i++){
+        if(bag[i]%2==0)
+        count++
+    }
+    if(count==K)
+    return true;
+    else
+    return false;
+}

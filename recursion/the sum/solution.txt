@@ -1,0 +1,49 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=input[0].trim().split(" ")
+	let num=0
+    for(let i=0;i<tc[0].length;i++){
+    num=num+(+tc[0][i])
+}
+
+	let pow=tc[1]
+	console.log(power(num*pow))
+}
+
+function power(num){
+    
+   if(num<10)
+   return num
+   
+  let sum=0
+  while(num!=0){
+      sum+=num%10
+      num=Math.floor(num/10)
+  }
+  
+  return (power(sum))
+
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

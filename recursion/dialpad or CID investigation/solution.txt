@@ -1,0 +1,62 @@
+//Enter code here
+function runProgram(input){
+	input=input.trim().split("\n")
+      let size=input[0]
+      permutation(size,"")
+}
+
+let option=["","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"]
+
+
+//lexicographically sorted
+function permutation(size,str){
+    if(size==0){
+    console.log(str)
+    return
+    }
+    let x=size[0]
+    let y=size.slice(1,size.length)
+    let z=option[x]
+    for(let i=0;i<z.length;i++){
+      permutation(y,str+z[i])
+    }
+}
+
+
+
+// function permutation(size,str){
+//     if(size==0){
+//     console.log(str)
+//     return
+//     }
+//     let x=size%10
+//     let y=Math.floor(size/10)
+//     let z=option[x]
+//     for(let i=0;i<z.length;i++){
+//       permutation(y,str+z[i])
+//     }
+// }
+
+
+    
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

@@ -1,0 +1,24 @@
+// Definition of Binary Tree Node
+// class Node {
+//     constructor(val) {
+//         this.val = val;
+//         this.left = null;
+//         this.right = null;
+//     }
+// }
+// Complete the function below
+
+function PreorderTraversal(root){
+       const result = [];
+    
+    function traverse(node) {
+        if(!node) return;
+        result.push(node.val);
+        traverse(node.left);
+        traverse(node.right);
+        
+    }
+    traverse(root);
+    return result;
+   
+}

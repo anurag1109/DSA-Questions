@@ -1,0 +1,58 @@
+//Enter code here
+function runProgram(input){
+	input=input.trim().split("\n")
+	    let [tar,n]=input[0].trim().split(" ").map(Number)
+	    let arr=input[1].trim().split(" ").map(Number)
+
+	    console.log(coinChange(arr,tar))
+	   
+}
+
+
+// function coin(n,arr,tar,i,dp){
+  
+//     if(tar==0)
+//      return 1
+//     if(tar<0||i==n)
+//      return 0
+//     if(dp[i][tar]!=-1){
+//      return dp[i][tar]       }
+//     dp[i][tar]= coin(n,arr,tar-arr[i],i,dp)+ coin(n,arr,tar,i+1,dp)
+//      return dp[i][tar]
+// }
+
+
+function coinChange(coins, amount) {
+  const dp = new Array(amount + 1).fill(0);
+  dp[0] = 1;
+  for (let i = 0; i < coins.length; i++) {
+    for (let j = coins[i]; j <= amount; j++) {
+      dp[j] += dp[j - coins[i]];
+    }
+  }
+  return dp[amount];
+}
+
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

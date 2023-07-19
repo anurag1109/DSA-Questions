@@ -1,0 +1,53 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let n=+input[line++]
+	    let str1=input[line++]
+	    let str2=input[line++]
+	    teacher(n,str1,str2)
+	}
+
+}
+
+function teacher(n,str1,str2){
+    // console.log(str1,str2)
+    let arr1=[]
+    let arr2=[]
+    for(let i=0;i<n;i++){
+        if(str1[i]=='#')
+        arr1.pop()
+        else
+        arr1.push(str1[i])
+        if(str2[i]=='#')
+        arr2.pop()
+        else
+        arr2.push(str2[i])
+    }
+   str1= arr1.join("")
+   str2= arr2.join("")
+    str1===str2?console.log("CORRECT"):console.log("WRONG")
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

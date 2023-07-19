@@ -1,0 +1,67 @@
+//Enter code here
+//Enter code here
+//Enter code here
+function runProgram(input){
+	// write code here
+	
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let arr1=input[line].trim().split(" ").map(Number)
+	    line++
+	    let size=arr1[0]
+	    let days=arr1[1]
+	    
+	    	let arr2=input[line].trim().split(" ").map(Number)
+	    	line++
+	    	let arr3=input[line].trim().split(" ").map(Number)
+	    	line++
+
+	
+	pasta(size,days,arr2,arr3)
+}
+	
+}
+
+function pasta(size,days,arr2,arr3){
+let obj={}
+for(let i=0;i<size;i++){
+    if(obj[arr2[i]]==undefined)
+    obj[arr2[i]]=1
+    else
+    obj[arr2[i]]+=1
+}
+
+for(let i=0;i<days;i++){
+    if(obj[arr3[i]]>0)
+     obj[arr3[i]]-=1
+     else{
+         console.log("ANGRY")
+         return
+     }
+    
+}
+console.log("HAPPY")
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

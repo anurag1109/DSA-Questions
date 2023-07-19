@@ -1,0 +1,64 @@
+//Enter code here
+function runProgram(input){
+	input=input.trim().split("\n")
+	let tc=input[0].trim().split(" ").map(Number)
+	let total=+tc[1]
+	let num=+tc[0] 
+	let cap=input[1].trim().split(" ").map(Number)
+
+	power(total,cap,0,0)
+	if(!flag)
+	console.log(-1)
+
+}
+let arr=[]
+let newarr=[]
+
+let flag=false
+function power(temp,cap,ele,j){
+
+    if(temp<0)
+      return 
+      
+    if(temp==0){
+        if(newarr.includes(arr.join("")))
+          return
+        else{
+          console.log(...arr)
+          newarr.push(arr.join(""))
+        }
+        flag=true
+        return
+    }
+    
+    for(let i=j;i<cap.length;i++){
+        if(ele<=cap[i]){
+        arr.push(cap[i])
+        power(temp-cap[i],cap,cap[i+1],i+1)
+        arr.pop()
+      }
+    }
+    return
+}
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

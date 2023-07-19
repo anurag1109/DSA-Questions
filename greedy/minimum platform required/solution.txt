@@ -1,0 +1,56 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	let size=+input[0]
+	let arr1=input[1].trim().split(" ")
+	let arr2=input[2].trim().split(" ")
+	let arr=[]
+	
+	for(let i=0;i<size;i++){
+	    let newarr=[]
+	    newarr[0]=arr1[i]
+	    newarr[1]=1
+	    arr.push(newarr)
+	}
+		for(let i=0;i<size;i++){
+	    let newarr=[]
+	    newarr[0]=arr2[i]
+	    newarr[1]=-1
+	    arr.push(newarr)
+	}
+	
+	platform(size,arr)
+
+}
+
+function platform(size,arr){
+   arr.sort((a,b)=>a[0].split(":").join("")-b[0].split(":").join(""))
+	
+	let cnt=0
+	let max=0
+	for(let i=0;i<2*size;i++){
+	   cnt+=arr[i][1]
+	   max= Math.max(max,cnt)
+	}
+	console.log(max)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

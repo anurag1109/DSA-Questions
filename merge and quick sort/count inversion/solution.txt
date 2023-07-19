@@ -1,0 +1,48 @@
+console.log(sort(0,N-1,arr))
+
+function sort(si,ei,arr){
+  let mi=Math.floor((si+ei)/2)
+  if(ei<=si)
+  return 0
+  
+  sort(si,mi,arr)
+  sort(mi+1,ei,arr)
+  return merge(si,ei,arr)
+}
+
+let cnt=0
+
+function merge(si,ei,arr){
+   let mid=Math.floor((si+ei)/2)
+   let ans=[]
+   let i=si
+   let j=mid+1
+   let k=0
+   while(i<=mid&&j<=ei){
+       if(arr[i]<=arr[j]){
+           ans[k]=arr[i]
+           k++
+           i++
+       }else{
+           ans[k]=arr[j]
+           k++
+           j++
+           cnt+=mid-i+1
+       }
+   }
+   while(i<=mid){
+        ans[k]=arr[i]
+           k++
+           i++
+   }
+    while(j<=ei){
+        ans[k]=arr[j]
+           k++
+           j++
+   }
+   
+  for(let i=0;i<ans.length;i++){
+      arr[si+i]=ans[i]
+  }
+   return cnt
+}

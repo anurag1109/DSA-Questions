@@ -1,0 +1,44 @@
+//solution using reversing of LL
+
+const LinkedListNode = class {
+    constructor(nodeData) {
+        this.data = nodeData;
+        this.next = null;
+    }
+};
+// Complete the function below
+var isPalindrome = function (head) {
+     let temp=head
+    let cnt=""
+    let j=10
+    while(temp!=null){
+    cnt=cnt+temp.data
+     temp=temp.next
+}
+
+temp=reverse(head)
+let cnt2=""
+j=10
+ while(temp!=null){
+    cnt2=cnt2+temp.data
+     temp=temp.next
+}
+
+if(cnt===cnt2)
+return(true)
+else
+return(false)
+    
+};
+
+function reverse(head) {
+    if(head.next==null)
+    return head
+    
+    let x= reverse(head.next)
+    head.next.next=head
+    head.next=null
+    return x
+    }
+
+//solution 1 end

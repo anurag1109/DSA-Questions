@@ -1,0 +1,78 @@
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n");
+	let tc=+input[0];
+	line=1;
+	let size=0;
+	for(let i=0;i<tc;i++){
+	    [row,col]=input[line].trim().split(" ").map(Number)
+	    line++
+	    let mat=[];
+	    for(let j=0;j<row;j++){
+	    mat.push(input[line].trim().split(" ").map(Number));
+	    line++;
+	    }
+
+	    let dp = [...Array(row)].map(() => Array(col).fill(-1));
+	    for(let j=0;j<col;j++)
+	    maxsum= Math.max(maxsum,addtar(0,j,row,col,mat,dp))
+	    console.log(maxsum)
+	}
+}
+
+//recursive
+function addtar(i,j,row,col,mat,dp){
+if(j<0||j>=col)
+ return 0
+ 
+ if(i==row)
+ return 0
+
+ if(dp[i][j]!=-1)
+ return dp[i][j]
+
+return dp[i][j]=mat[i][j]+Math.max(addtar(i+1,j-1,row,col,mat,dp),addtar(i+1,j+1,row,col,mat,dp),addtar(i+1,j,row,col,mat,dp))
+}
+
+
+//Iterative method
+// function maxTileSum(h, w, tiles) {
+//   let dp = [...Array(h)].map(() => Array(w).fill(0));
+  
+//   for (let j = 0; j < w; j++) {
+//     dp[0][j] = tiles[0][j];
+//   }
+//   for (let i = 1; i < h; i++) {
+//     for (let j = 0; j < w; j++) {
+//       let maxPrev = dp[i-1][j];
+//       if (j > 0) maxPrev = Math.max(maxPrev, dp[i-1][j-1]);
+//       if (j < w-1) maxPrev = Math.max(maxPrev, dp[i-1][j+1]);
+//       dp[i][j] = maxPrev + tiles[i][j];
+//     }
+//   }
+//   return Math.max(...dp[h-1]);
+// }
+
+
+
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

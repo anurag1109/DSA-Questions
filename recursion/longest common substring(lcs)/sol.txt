@@ -1,0 +1,44 @@
+//Enter code here//Enter code here
+function runProgram(input){
+	input=input.trim().split("\n")
+	let str1=input[0]
+	let str2=input[1]
+	let dp = [...Array(str1.length+1)].map(() => Array(str2.length+1).fill(0));
+	console.log(print(str1,str2,0,0,dp))
+  }
+
+
+function print(str1,str2,i,j,dp){
+if(i==str1.length||j==str2.length)
+return 0
+
+if(dp[i][j])
+return dp[i][j]
+
+if(str1[i]==str2[j])
+return dp[i][j]=1+print(str1,str2,i+1,j+1,dp)
+
+return dp[i][j]=Math.max(print(str1,str2,i+1,j,dp),print(str1,str2,i,j+1,dp))
+   
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

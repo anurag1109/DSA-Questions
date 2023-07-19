@@ -1,0 +1,64 @@
+//Enter code here
+function runProgram(input){
+	// write code here
+	input=input.trim().split("\n")
+	let tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	let size=+input[line];
+	line++;
+	let mat1=input[line].trim().split(" ").map(Number)
+	    line++
+    let mat2=input[line].trim().split(" ").map(Number)
+        line++
+	print(size,mat1,mat2)
+  }
+}
+
+function print(size,mat1,mat2){
+    let obj1={};
+    for(let i=0;i<size;i++){
+        if(obj1[mat1[i]]==undefined)
+        obj1[mat1[i]]=1
+        else
+        obj1[mat1[i]]+=1
+    }
+    let obj2={};
+    for(let i=0;i<size;i++){
+      if(obj2[mat2[i]]==undefined)
+        obj2[mat2[i]]=1
+        else
+        obj2[mat2[i]]+=1
+    }
+    let count=0
+    for(let key in obj1){
+      if(obj2[key]!=undefined){
+        if(obj2[key]<obj1[key])
+        count+=obj2[key]
+        else
+        count+=obj1[key]
+    }
+    }
+    console.log(count)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

@@ -1,0 +1,24 @@
+function missingVowel(N, str) {
+  //write code here
+  let vowel="aeiou"
+  let count=0;
+  let vow="";
+  for(let i=0;i<vowel.length;i++){
+      for(let j=0;j<N;j++){
+      if(vowel[i]==str[j]){
+          count++;
+      break;
+      }
+      }
+      if(count==0)
+      vow=vow+vowel[i];
+      count=0;
+  }
+if(vow.length==0)
+console.log(-1);
+else
+console.log(vow);
+  
+}
+
+//https://oj.masaischool.com/contest/5862/problems

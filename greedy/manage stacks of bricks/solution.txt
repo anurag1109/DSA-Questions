@@ -1,0 +1,58 @@
+function runProgram(input){
+	input=input.trim().split("\n")
+	tc=+input[0]
+	let line=1
+	for(let i=0;i<tc;i++){
+	    let n=+input[line]
+	    line++
+	    let a=+input[line]
+	    line++
+	    let r=+input[line]
+	    line++
+	    let arr1=[]
+	    let arr2=[]
+	    for(let i=0;i<n;i++){
+	        arr1.push(input[line].trim().split(" ").map(Number)[0])
+	        arr2.push(input[line].trim().split(" ").map(Number)[1])
+	        line++
+	    }
+
+	    pairs(n,a,r,arr1,arr2)
+    }
+}
+
+function pairs(n,a,r,arr1,arr2){
+    let sum=0
+  arr1.sort((a,b)=>a-b)
+  arr2.sort((a,b)=>a-b)
+  for(let i=0;i<n;i++){
+      if(arr1[i]==arr2[i])
+      continue
+      if(arr1[i]>arr2[i])
+      sum+=(arr1[i]-arr2[i])*r
+      if(arr1[i]<arr2[i])
+      sum+=(arr2[i]-arr1[i])*a
+  }
+  console.log(sum)
+}
+
+if (process.env.USER === "") {
+    runProgram(``);
+} else {
+        process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+        read += input;
+  });
+  process.stdin.on("end", function () {
+        read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+        read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
